@@ -255,7 +255,7 @@ Screenshots are stored in:
 
 ### 5.1 Overview — Global Performance (2019 vs 2020)
 
-![Overview Dashboard](/reports/aviation_analytics_Page_1.jpg)
+![Overview Dashboard](report/aviation_analytics_Page_1.jpg)
 
 **Objective**  
 Provide a high-level comparison of flight operations between 2019 and 2020 to measure the impact of the COVID-19 pandemic on U.S. aviation performance.
@@ -286,7 +286,7 @@ However, the cancellation rate rose slightly (+11.9%), mainly due to schedule di
 
 ### 5.2 Delay Causes Analysis
 
-![Delay Causes Analysis](/reports/aviation_analytics_Page_2.jpg)
+![Delay Causes Dashboard](report/aviation_analytics_Page_2.jpg)
 
 **Objective**  
 Identify and compare the main operational causes of delays and cancellations between 2019 and 2020.  
@@ -327,7 +327,7 @@ Efficiency gains in 2020 were not purely random — they stemmed from reduced tr
 ---
 ### 5.3 Airline Performance
 
-![Airline Performance Dashboard](/reports/aviation_analytics_Page_3.jpg)
+![Airline Performance Dashboard](report/aviation_analytics_Page_3.jpg)
 
 **Objective**  
 Evaluate how major U.S. airlines adapted to the pandemic by comparing their operational reliability in 2019 vs 2020.  
@@ -369,7 +369,7 @@ Airlines adapted to lower demand by optimizing punctuality, but cancellations re
 ---
 ### 5.4 Airport Performance
 
-![Airport Performance Dashboard](/reports/aviation_analytics_Page_4.jpg)
+![Airport Performance Dashboard](report/aviation_analytics_Page_4.jpg)
 
 **Objective**  
 Analyze the operational impact of COVID-19 across major U.S. airports by comparing delay and cancellation trends between 2019 and 2020.  
