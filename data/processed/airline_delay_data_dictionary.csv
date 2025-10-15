@@ -1,0 +1,38 @@
+column,dtype,null_pct,example
+airport,object,0.0,ABE
+airport_name,object,0.0,"Allentown/Bethlehem/Easton, PA: Lehigh Valley International"
+arr_cancelled,float64,0.0,0.0
+arr_del15,float64,0.0,3.0
+arr_delay,float64,0.0,89.0
+arr_diverted,float64,0.0,1.0
+arr_flights,float64,0.0,44.0
+avg_delay_min_per_delayed_flight,float64,5.04,29.666666666666668
+cancellation_rate,float64,0.24,0.0
+carrier,object,0.0,9E
+carrier_cause_share_ct,float64,5.04,0.5433333333333333
+carrier_cause_share_min,float64,5.04,0.6292134831460674
+carrier_ct,float64,0.0,1.63
+carrier_delay,float64,0.0,56.0
+carrier_name,object,0.0,Endeavor Air Inc.
+cause_counts_exceed_delayed_flag,bool,0.0,False
+delayed_rate,float64,0.24,0.06818181818181818
+late_aircraft_cause_share_ct,float64,5.04,0.4166666666666667
+late_aircraft_cause_share_min,float64,5.04,0.33707865168539325
+late_aircraft_ct,float64,0.0,1.25
+late_aircraft_delay,float64,0.0,30.0
+month,Int64,0.0,12
+nas_cause_share_ct,float64,5.04,0.04
+nas_cause_share_min,float64,5.04,0.033707865168539325
+nas_ct,float64,0.0,0.12
+nas_delay,float64,0.0,3.0
+security_cause_share_ct,float64,5.04,0.0
+security_cause_share_min,float64,5.04,0.0
+security_ct,float64,0.0,0.0
+security_delay,float64,0.0,0.0
+weather_cause_share_ct,float64,5.04,0.0
+weather_cause_share_min,float64,5.04,0.0
+weather_ct,float64,0.0,0.0
+weather_delay,float64,0.0,0.0
+year,Int64,0.0,2020
+year_month,datetime64[ns],0.0,2020-12-01 00:00:00
+year_month_key,object,0.0,2020-12
