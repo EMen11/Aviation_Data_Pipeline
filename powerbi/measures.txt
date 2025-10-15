@@ -1,0 +1,129 @@
+
+==========================
+Power BI Measures (DAX)
+==========================
+
+This file contains all DAX measures used in the Aviation_Data_Pipeline project.
+
+---------------------------------------------------
+1. Base KPIs
+---------------------------------------------------
+
+Total flights =
+    SUM(fact_delay[arr_flights])
+
+Average delay (min) =
+    AVERAGE(fact_delay[avg_delay_min_per_delayed_flight])
+
+---------------------------------------------------
+2. Year-over-Year Comparisons
+---------------------------------------------------
+
+Total Flights Var % =
+    DIVIDE([Total Flights 2020] - [Total Flights 2019], [Total Flights 2019])
+
+Delayed Rate Var % =
+    DIVIDE([Delayed Rate 2020] - [Delayed Rate 2019], [Delayed Rate 2019])
+
+Cancelled Rate Var % =
+    DIVIDE([Cancelled Rate 2020] - [Cancelled Rate 2019], [Cancelled Rate 2019])
+
+---------------------------------------------------
+3. Delay Causes Analysis
+---------------------------------------------------
+
+Delay Minutes by Cause =
+    VAR c = SELECTEDVALUE('Cause'[Cause])
+    RETURN
+        SWITCH(
+            c,
+            "Carrier",       SUM(fact_delay[carrier_delay]),
+            "Weather",       SUM(fact_delay[weather_delay]),
+            "NAS",           SUM(fact_delay[nas_delay]),
+            "Security",      SUM(fact_delay[security_delay]),
+            "Late Aircraft", SUM(fact_delay[late_aircraft_delay]),
+            BLANK()
+        )
+
+Delay Share % =
+    DIVIDE([Delay Minutes by Cause], [Total Delay (min)])
+
+---------------------------------------------------
+4. Year-specific Helper Measures
+---------------------------------------------------
+
+Avg Delay 2019 =
+    CALCULATE([Average delay (min)], 'dim_date'[year] = 2019)
+
+Avg Delay 2020 =
+    CALCULATE([Average delay (min)], 'dim_date'[year] = 2020)
+
+Delayed Rate 2019 =
+    CALCULATE([%delayed flights], 'dim_date'[year] = 2019)
+
+Delayed Rate 2020 =
+    CALCULATE([%delayed flights], 'dim_date'[year] = 2020)
+
+Cancelled Rate 2019 =
+    CALCULATE([%cancelled], 'dim_date'[year] = 2019)
+
+Cancelled Rate 2020 =
+    CALCULATE([%cancelled], 'dim_date'[year] = 2020)
+
+---------------------------------------------------
+5. Narrative Insights
+---------------------------------------------------
+
+Insight Overview =
+    VAR TotalFlightsChange = [Total Flights Var %]
+    VAR DelayedRateChange  = [Delayed Rate Var %]
+    VAR AvgDelay2020       = [Avg Delay 2020]
+    VAR AvgDelay2019       = [Avg Delay 2019]
+    VAR TrafficInsight =
+        "In 2020, total flight traffic decreased by "
+        & FORMAT(ABS(TotalFlightsChange), "0.0%")
+        & " compared to 2019."
+    VAR DelayInsight =
+        IF(
+            DelayedRateChange < 0,
+            "However, operational performance significantly improved: the delay rate fell by "
+                & FORMAT(ABS(DelayedRateChange), "0.00")
+                & " percentage points.",
+            "Unfortunately, despite lower volume, operational performance deteriorated: the delay rate increased by "
+                & FORMAT(DelayedRateChange, "0.00")
+                & " percentage points."
+        )
+    VAR Conclusion =
+        " The average delay per delayed flight dropped from "
+        & FORMAT(AvgDelay2019, "0.0") & " min in 2019 to "
+        & FORMAT(AvgDelay2020, "0.0") & " min in 2020."
+    RETURN
+        TrafficInsight & " " & DelayInsight & Conclusion
+
+
+Insight Airlines =
+    VAR totalFlightsChange = [Total Flights Var %]
+    VAR delayChange        = [Delayed Rate Var %]
+    VAR cancelChange       = [Cancelled Rate Var %]
+    RETURN
+        "In 2020, major U.S. airlines saw a "
+        & FORMAT(ABS(totalFlightsChange), "0.0%")
+        & " decrease in total flights. Despite the drop, operational performance improved significantly, the average delay rate fell by "
+        & FORMAT(ABS(delayChange), "0.0%")
+        & ", while the cancellation rate changed by "
+        & FORMAT(cancelChange, "0.0%")
+        & "."
+
+
+Insight Airports =
+    VAR totalFlightsChange = [Total Flights Var %]
+    VAR delayChange        = [Delayed Rate Var %]
+    VAR cancelChange       = [Cancelled Rate Var %]
+    RETURN
+        "U.S. airports experienced a "
+        & FORMAT(ABS(totalFlightsChange), "0.0%")
+        & " decline in traffic in 2020 compared to 2019. Delay performance improved, with the average delay rate decreasing by "
+        & FORMAT(ABS(delayChange), "0.0%")
+        & ", but the cancellation rate increased by "
+        & FORMAT(ABS(cancelChange), "0.0%")
+        & ", mainly driven by capacity adjustments at major hubs."
